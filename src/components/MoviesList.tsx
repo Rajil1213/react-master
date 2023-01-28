@@ -1,0 +1,28 @@
+import React from "react";
+
+import Movie from "./Movie";
+import classes from "./MoviesList.module.css";
+import { Movie as MovieModel } from "../models/Movie";
+
+interface MovieListProps {
+  movies: MovieModel[] | undefined;
+}
+
+const MoviesList = (props: MovieListProps) => {
+  return (
+    <ul className={classes["movies-list"]}>
+      {props.movies &&
+        props.movies.map((movie) => (
+          <Movie
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            releaseDate={movie.releaseDate}
+            openingText={movie.openingText}
+          />
+        ))}
+    </ul>
+  );
+};
+
+export default MoviesList;
