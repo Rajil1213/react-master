@@ -9,11 +9,11 @@ const Counter = () => {
   const toggleCounterHandler = () => {};
 
   const incrementHandler = () => {
-    dispatch({ type: "INCREMENT" });
+    dispatch({ type: "INCREMENT", amount: 1 });
   };
 
   const decrementHandler = () => {
-    dispatch({ type: "DECREMENT" });
+    dispatch({ type: "DECREMENT", amount: 1 });
   };
 
   return (

@@ -6,6 +6,7 @@ export type counterState = {
 
 export type counterActions = {
   type: "INCREMENT" | "DECREMENT" | "";
+  amount: number;
 };
 
 const counterReducer: Reducer<counterState, counterActions> = (
@@ -13,10 +14,10 @@ const counterReducer: Reducer<counterState, counterActions> = (
   action: counterActions
 ) => {
   if (action.type === "INCREMENT") {
-    return { counter: state.counter + 1 };
+    return { counter: state.counter + action.amount };
   }
   if (action.type === "DECREMENT") {
-    return { counter: state.counter - 1 };
+    return { counter: state.counter - action.amount };
   }
 
   return state;
