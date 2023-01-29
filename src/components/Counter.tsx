@@ -1,19 +1,19 @@
-import { Component } from "react";
+import { Dispatch } from "react";
 import { counterActions, counterState } from "../store";
 import classes from "./Counter.module.css";
-import { useSelector, useDispatch, connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-export const Counter = () => {
+const Counter = () => {
   const counter = useSelector((state: counterState) => state.counter);
-  const dispatch = useDispatch();
+  const dispatch: Dispatch<counterActions> = useDispatch();
   const toggleCounterHandler = () => {};
 
   const incrementHandler = () => {
-    dispatch<counterActions>({ type: "INCREMENT" });
+    dispatch({ type: "INCREMENT" });
   };
 
   const decrementHandler = () => {
-    dispatch<counterActions>({ type: "DECREMENT" });
+    dispatch({ type: "DECREMENT" });
   };
 
   return (
@@ -29,45 +29,45 @@ export const Counter = () => {
   );
 };
 
-class CounterClass extends Component {
-  incrementHandler() {
-    (this.props as ReturnType<typeof mapDispatchToProps>).increment();
-  }
-  decrementHandler() {
-    (this.props as ReturnType<typeof mapDispatchToProps>).decrement();
-  }
-  toggleCounterHandler() {}
+// class CounterClass extends Component {
+//   incrementHandler() {
+//     (this.props as ReturnType<typeof mapDispatchToProps>).increment();
+//   }
+//   decrementHandler() {
+//     (this.props as ReturnType<typeof mapDispatchToProps>).decrement();
+//   }
+//   toggleCounterHandler() {}
 
-  render() {
-    return (
-      <main className={classes.counter}>
-        <h1>Redux Counter</h1>
-        <div className={classes.value}>
-          {(this.props as ReturnType<typeof mapStateToProps>).counter}
-        </div>
-        <div>
-          <button onClick={this.incrementHandler.bind(this)}>Increment</button>
-          <button onClick={this.decrementHandler.bind(this)}>Decrement</button>
-        </div>
-        <button onClick={this.toggleCounterHandler}>Toggle Counter</button>
-      </main>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <main className={classes.counter}>
+//         <h1>Redux Counter</h1>
+//         <div className={classes.value}>
+//           {(this.props as ReturnType<typeof mapStateToProps>).counter}
+//         </div>
+//         <div>
+//           <button onClick={this.incrementHandler.bind(this)}>Increment</button>
+//           <button onClick={this.decrementHandler.bind(this)}>Decrement</button>
+//         </div>
+//         <button onClick={this.toggleCounterHandler}>Toggle Counter</button>
+//       </main>
+//     );
+//   }
+// }
 
-const mapStateToProps = (state: counterState) => {
-  return {
-    counter: state.counter,
-  };
-};
+// const mapStateToProps = (state: counterState) => {
+//   return {
+//     counter: state.counter,
+//   };
+// };
 
-const mapDispatchToProps = (dispatch: (action: counterActions) => any) => {
-  return {
-    increment: () => dispatch({ type: "INCREMENT" }),
-    decrement: () => dispatch({ type: "DECREMENT" }),
-  };
-};
+// const mapDispatchToProps = (dispatch: (action: counterActions) => any) => {
+//   return {
+//     increment: () => dispatch({ type: "INCREMENT" }),
+//     decrement: () => dispatch({ type: "DECREMENT" }),
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CounterClass);
+// export default connect(mapStateToProps, mapDispatchToProps)(CounterClass);
 
-// export default Counter;
+export default Counter;
