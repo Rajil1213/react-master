@@ -1,10 +1,10 @@
 import { createStore, Reducer } from "redux";
 
-type counterState = {
+export type counterState = {
   counter: number;
 };
 
-type counterActions = {
+export type counterActions = {
   type: "INCREMENT" | "DECREMENT" | "";
 };
 
