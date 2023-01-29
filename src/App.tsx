@@ -1,7 +1,7 @@
-import Counter from "./components/Counter";
+import CounterClass from "./components/Counter";
 
 function App() {
-  return <Counter />;
+  return <CounterClass />;
 }
 
 export default App;
