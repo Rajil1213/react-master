@@ -10,10 +10,14 @@ const initState: counterState = {
   showCounter: true,
 };
 
-export type counterActions = {
-  type: "INCREMENT" | "DECREMENT" | "";
-  amount: number;
-};
+export type counterActions =
+  | {
+      type: "INCREMENT" | "DECREMENT" | "";
+      amount: number;
+    }
+  | {
+      type: "TOGGLE";
+    };
 
 const counterReducer: Reducer<counterState, counterActions> = (
   state: counterState = initState,
@@ -24,6 +28,9 @@ const counterReducer: Reducer<counterState, counterActions> = (
   }
   if (action.type === "DECREMENT") {
     return { ...state, counter: state.counter - action.amount };
+  }
+  if (action.type === "TOGGLE") {
+    return { ...state, showCounter: !state.showCounter };
   }
 
   return state;
