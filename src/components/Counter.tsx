@@ -1,12 +1,12 @@
 import React from "react";
-import { counterState, counterActions } from "../store";
+import { counterActions, RootState } from "../store";
 import classes from "./Counter.module.css";
 import { useSelector, useDispatch } from "react-redux";
 
 const Counter = () => {
-  const counter = useSelector((state: counterState) => ({
-    value: state.counter,
-    show: state.showCounter,
+  const counter = useSelector((state: RootState) => ({
+    value: state.counter.counter,
+    show: state.counter.showCounter,
   }));
   const dispatch = useDispatch();
 
