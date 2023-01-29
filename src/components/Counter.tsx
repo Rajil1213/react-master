@@ -1,5 +1,6 @@
 import React from "react";
-import { counterActions, RootState } from "../store";
+import { counterActions } from "../store/counter";
+import { RootState } from "../store";
 import classes from "./Counter.module.css";
 import { useSelector, useDispatch } from "react-redux";
 
