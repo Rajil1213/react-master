@@ -7,6 +7,7 @@ import Events from "./components/Events";
 import EventDetail from "./components/EventDetail";
 import NewEvent from "./components/NewEvent";
 import EditEvent from "./components/EditEvent";
+import EventsRootLayout from "./components/EventsRootLayout";
 
 // 1. Add five new (dummy) page components (content can be simple <h1> elements)
 //    - HomePage
@@ -34,10 +35,16 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "events", element: <Events /> },
-      { path: "events/:eventId", element: <EventDetail /> },
-      { path: "events/new", element: <NewEvent /> },
-      { path: "events/:eventId/edit", element: <EditEvent /> },
+      {
+        path: "events",
+        element: <EventsRootLayout />,
+        children: [
+          { index: true, element: <Events /> },
+          { path: ":eventId", element: <EventDetail /> },
+          { path: "new", element: <NewEvent /> },
+          { path: ":eventId/edit", element: <EditEvent /> },
+        ],
+      },
     ],
   },
 ]);
