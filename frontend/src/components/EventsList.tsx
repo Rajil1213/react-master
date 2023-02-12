@@ -1,7 +1,11 @@
 import { Event } from "./EventItem";
 import classes from "./EventsList.module.css";
 
-function EventsList(events: Event[]) {
+type EventsListProps = {
+  events: Event[];
+};
+
+function EventsList({ events }: EventsListProps) {
   return (
     <div className={classes.events}>
       <h1>All Events</h1>

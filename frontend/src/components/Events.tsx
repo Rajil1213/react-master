@@ -1,64 +1,38 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { Event } from "./EventItem";
-import { Link } from "react-router-dom";
 
-const dummyEvents: Event[] = [
-  {
-    id: "e1",
-    image: "",
-    date: new Date().toLocaleDateString(),
-    description: "",
-    title: "Event 1",
-  },
-  {
-    id: "e2",
-    image: "",
-    date: new Date().toLocaleDateString(),
-    description: "",
-    title: "Event 2",
-  },
-  {
-    id: "e3",
-    image: "",
-    date: new Date().toLocaleDateString(),
-    description: "",
-    title: "Event 3",
-  },
-  {
-    id: "e4",
-    image: "",
-    date: new Date().toLocaleDateString(),
-    description: "",
-    title: "Event 4",
-  },
-  {
-    id: "e5",
-    image: "",
-    date: new Date().toLocaleDateString(),
-    description: "",
-    title: "Event 5",
-  },
-  {
-    id: "e6",
-    image: "",
-    date: new Date().toLocaleDateString(),
-    description: "",
-    title: "Event 6",
-  },
-];
+import EventsList from "../components/EventsList";
 
-const Events = () => {
+function EventsPage() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [fetchedEvents, setFetchedEvents] = useState<Event[]>([]);
+  const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    async function fetchEvents() {
+      setIsLoading(true);
+      const response = await fetch("http://localhost:8080/events");
+
+      if (!response.ok) {
+        setError("Fetching events failed.");
+      } else {
+        const resData = await response.json();
+        setFetchedEvents(resData.events);
+      }
+      setIsLoading(false);
+    }
+
+    fetchEvents();
+  }, []);
   return (
-    <ul>
-      {dummyEvents.map((event) => {
-        return (
-          <li key={event.id}>
-            <Link to={`/events/${event.id}`}>{event.title}</Link>
-          </li>
-        );
-      })}
-    </ul>
+    <>
+      <div style={{ textAlign: "center" }}>
+        {isLoading && <p>Loading...</p>}
+        {error && <p>{error}</p>}
+      </div>
+      {!isLoading && fetchedEvents && <EventsList events={fetchedEvents} />}
+    </>
   );
-};
+}
 
-export default Events;
+export default EventsPage;
