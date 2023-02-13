@@ -3,12 +3,11 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./components/RootLayout";
 import HomePage from "./components/Home";
-import Events from "./components/Events";
+import Events, { loader } from "./components/Events";
 import EventDetail from "./components/EventDetail";
 import NewEvent from "./components/NewEvent";
 import EditEvent from "./components/EditEvent";
 import EventsRootLayout from "./components/EventsRootLayout";
-import { Event } from "./components/EventItem";
 
 // // 1. Add five new (dummy) page components (content can be simple <h1> elements)
 // //    - HomePage
@@ -43,18 +42,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Events />,
-            loader: async () => {
-              const response = await fetch("http://localhost:8080/events");
-
-              if (!response.ok) {
-                // later
-              } else {
-                const resData = await response.json();
-
-                if (isEvents(resData)) return resData.events;
-                return {};
-              }
-            },
+            loader: loader,
           },
           { path: ":eventId", element: <EventDetail /> },
           { path: "new", element: <NewEvent /> },
@@ -70,9 +58,3 @@ function App() {
 }
 
 export default App;
-
-// typeguard for events API
-const isEvents = (object: unknown): object is { events: Event[] } => {
-  if (object !== null && typeof object === "object") return "events" in object;
-  return false;
-};
