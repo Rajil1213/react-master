@@ -3,12 +3,14 @@ import {
   LoaderFunction,
   LoaderFunctionArgs,
   json,
-  useLoaderData,
+  useRouteLoaderData,
 } from "react-router-dom";
 import EventItem, { Event } from "../components/EventItem";
 
 const EventDetail = () => {
-  const event = useLoaderData() as ReturnType<typeof loader> as {
+  const event = useRouteLoaderData("event-detail") as ReturnType<
+    typeof loader
+  > as {
     event: Event;
   };
 
