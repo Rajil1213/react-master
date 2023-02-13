@@ -1,5 +1,5 @@
 import EventsList from "../components/EventsList";
-import { useLoaderData } from "react-router-dom";
+import { LoaderFunction, json, useLoaderData } from "react-router-dom";
 import { Event } from "../components/EventItem";
 
 function EventsPage() {
@@ -22,13 +22,11 @@ const isEvents = (object: unknown): object is { events: Event[] } => {
   return false;
 };
 
-export const loader = async () => {
+export const loader: LoaderFunction = async () => {
   const response = await fetch("http://localhost:8080/events");
 
   if (!response.ok) {
-    throw new Response(JSON.stringify({ message: "Could not fetch events!" }), {
-      status: 500,
-    });
+    throw json({ message: "Could not fetch events!" }, { status: 500 });
   } else {
     return response;
   }

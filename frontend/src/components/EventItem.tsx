@@ -8,7 +8,11 @@ export type Event = {
   description: string;
 };
 
-function EventItem(event: Event) {
+type EventItemProps = {
+  event: Event;
+};
+
+function EventItem({ event }: EventItemProps) {
   function startDeleteHandler() {
     // ...
   }

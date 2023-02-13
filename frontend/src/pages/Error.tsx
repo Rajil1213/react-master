@@ -6,7 +6,7 @@ import MainNavigation from "../components/MainNavigation";
 const Error = () => {
   const error = useRouteError() as {
     status: number;
-    data: string;
+    data: { message: "" };
   };
   const status = error.status;
 
@@ -14,7 +14,7 @@ const Error = () => {
   let message = "Something went wrong!";
 
   if (status === 500) {
-    message = JSON.parse(error.data).message;
+    message = error.data.message;
   }
   return (
     <>
