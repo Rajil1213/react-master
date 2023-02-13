@@ -1,13 +1,14 @@
 // Challenge / Exercise
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import RootLayout from "./components/RootLayout";
-import HomePage from "./components/Home";
-import Events, { loader } from "./components/Events";
-import EventDetail from "./components/EventDetail";
-import NewEvent from "./components/NewEvent";
-import EditEvent from "./components/EditEvent";
-import EventsRootLayout from "./components/EventsRootLayout";
+import RootLayout from "./pages/RootLayout";
+import HomePage from "./pages/Home";
+import Events, { loader } from "./pages/Events";
+import EventDetail from "./pages/EventDetail";
+import NewEvent from "./pages/NewEvent";
+import EditEvent from "./pages/EditEvent";
+import EventsRootLayout from "./pages/EventsRootLayout";
+import Error from "./pages/Error";
 
 // // 1. Add five new (dummy) page components (content can be simple <h1> elements)
 // //    - HomePage
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
+    errorElement: <Error />,
     children: [
       { index: true, element: <HomePage /> },
       {
