@@ -9,7 +9,8 @@ import {
   action as EventDeleteAction,
 } from "./pages/EventDetail";
 import EventDetail from "./pages/EventDetail";
-import NewEvent, { action as NewEventAction } from "./pages/NewEvent";
+import { action as FormAction } from "./components/EventForm";
+import NewEvent from "./pages/NewEvent";
 import EditEvent from "./pages/EditEvent";
 import EventsRootLayout from "./pages/EventsRootLayout";
 import Error from "./pages/Error";
@@ -60,10 +61,10 @@ const router = createBrowserRouter([
                 element: <EventDetail />,
                 action: EventDeleteAction,
               },
-              { path: "edit", element: <EditEvent /> },
+              { path: "edit", element: <EditEvent />, action: FormAction },
             ],
           },
-          { path: "new", element: <NewEvent />, action: NewEventAction },
+          { path: "new", element: <NewEvent />, action: FormAction },
         ],
       },
     ],

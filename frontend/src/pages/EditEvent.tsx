@@ -11,7 +11,12 @@ const EditEvent = () => {
     event: Event;
   };
 
-  return <EventForm event={data.event} />;
+  return (
+    <EventForm
+      event={data.event}
+      method="patch"
+    />
+  );
 };
 
 export default EditEvent;
