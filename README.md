@@ -1,1 +1,4 @@
-# Each project is on a separate branch
+# Covered Concepts
+
+* Lazy Loading
+* Build
