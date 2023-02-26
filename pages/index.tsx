@@ -2,9 +2,21 @@ import { MongoClient } from "mongodb";
 import { MeetupItemProps } from "@/components/meetups/MeetupItem";
 import MeetupList from "@/components/meetups/MeetupList";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
+import Head from "next/head";
 
 const HomePage = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
-  return <MeetupList meetups={props.meetups} />;
+  return (
+    <>
+      <Head>
+        <title>React Meetups</title>
+        <meta
+          name="description"
+          content="Browse highly reactive meetups"
+        />
+      </Head>
+      <MeetupList meetups={props.meetups} />;
+    </>
+  );
 };
 
 export const getStaticProps: GetStaticProps<{
