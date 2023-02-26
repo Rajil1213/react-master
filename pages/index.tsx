@@ -1,5 +1,6 @@
 import { MeetupItemProps } from "@/components/meetups/MeetupItem";
 import MeetupList from "@/components/meetups/MeetupList";
+import { GetStaticProps, InferGetStaticPropsType } from "next";
 
 const DUMMY_MEETUPS: MeetupItemProps[] = [
   {
@@ -28,8 +29,20 @@ const DUMMY_MEETUPS: MeetupItemProps[] = [
   },
 ];
 
-const HomePage = () => {
-  return <MeetupList meetups={DUMMY_MEETUPS} />;
+const HomePage = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
+  return <MeetupList meetups={props.meetups} />;
+};
+
+export const getStaticProps: GetStaticProps<{
+  meetups: MeetupItemProps[];
+}> = () => {
+  // fetch from API
+  return {
+    props: {
+      meetups: DUMMY_MEETUPS,
+    },
+    revalidate: 10,
+  };
 };
 
 export default HomePage;
