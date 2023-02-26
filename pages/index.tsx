@@ -1,33 +1,7 @@
+import { MongoClient } from "mongodb";
 import { MeetupItemProps } from "@/components/meetups/MeetupItem";
 import MeetupList from "@/components/meetups/MeetupList";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-
-const DUMMY_MEETUPS: MeetupItemProps[] = [
-  {
-    id: "m1",
-    title: "A First Meetup",
-    address: "Address 1",
-    description: "This is a first meetup!",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Am_Strand_von_Ko_Tao.jpg/1920px-Am_Strand_von_Ko_Tao.jpg",
-  },
-  {
-    id: "m2",
-    title: "A Second Meetup",
-    address: "Address 2",
-    description: "This is a second meetup!",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Am_Strand_von_Ko_Tao.jpg/1920px-Am_Strand_von_Ko_Tao.jpg",
-  },
-  {
-    id: "m3",
-    title: "A Third Meetup",
-    address: "Address 3",
-    description: "This is a third meetup!",
-    image:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Am_Strand_von_Ko_Tao.jpg/1920px-Am_Strand_von_Ko_Tao.jpg",
-  },
-];
 
 const HomePage = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   return <MeetupList meetups={props.meetups} />;
@@ -35,11 +9,30 @@ const HomePage = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
 
 export const getStaticProps: GetStaticProps<{
   meetups: MeetupItemProps[];
-}> = () => {
+}> = async () => {
   // fetch from API
+  const username = process.env.DB_USERNAME ?? "";
+  const password = process.env.DB_PASSWORD ?? "";
+
+  const client = await MongoClient.connect(
+    `mongodb+srv://${username}:${password}@cluster0.wpfjobs.mongodb.net/meetups?retryWrites=true&w=majority`
+  );
+  const db = client.db();
+  const meetupsCol = db.collection("meetups");
+  const result = await meetupsCol.find().toArray();
+
+  console.log(result);
+  client.close();
+
   return {
     props: {
-      meetups: DUMMY_MEETUPS,
+      meetups: result.map((meetup) => ({
+        title: meetup.title as string,
+        address: meetup.address as string,
+        description: meetup.description as string,
+        image: meetup.image as string,
+        id: meetup._id.toString(),
+      })),
     },
     revalidate: 10,
   };
