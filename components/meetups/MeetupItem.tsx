@@ -6,6 +6,7 @@ export interface MeetupItemProps {
   image: string;
   title: string;
   address: string;
+  description: string;
 }
 
 function MeetupItem(props: MeetupItemProps) {
