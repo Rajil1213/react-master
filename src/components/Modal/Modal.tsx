@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./Modal.module.css";
+import { Transition, TransitionStatus } from "react-transition-group";
 
 interface ModalProps {
   show: boolean;
@@ -8,19 +9,24 @@ interface ModalProps {
 
 const Modal = (props: ModalProps) => {
   return (
-    <div
-      className={`${classes.Modal} ${
-        props.show ? classes.ModalOpen : classes.ModalClosed
-      }`}
-    >
-      <h1>A Modal</h1>
-      <button
-        className="Button"
-        onClick={props.closed}
-      >
-        Dismiss
-      </button>
-    </div>
+    <Transition in={props.show} timeout={500} unmountOnExit mountOnEnter>
+      {(state: TransitionStatus) => (
+        <div
+          className={`${classes.Modal} ${
+            state === "entering"
+              ? classes.ModalOpen
+              : state === "exiting"
+              ? classes.ModalClosed
+              : ""
+          }`}
+        >
+          <h1>A Modal</h1>
+          <button className="Button" onClick={props.closed}>
+            Dismiss
+          </button>
+        </div>
+      )}
+    </Transition>
   );
 };
 
