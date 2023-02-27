@@ -1,5 +1,6 @@
 import React from "react";
-import classes from "./Modal.module.css";
+// import classes from "./Modal.module.css";
+import "./Modal.css";
 import { CSSTransition } from "react-transition-group";
 
 interface ModalProps {
@@ -10,7 +11,7 @@ interface ModalProps {
 const Modal = (props: ModalProps) => {
   return (
     <CSSTransition in={props.show} timeout={500} unmountOnExit mountOnEnter classNames="fade-slide">
-      <div className={classes.Modal}>
+      <div className="Modal">
         <h1>A Modal</h1>
         <button className="Button" onClick={props.closed}>
           Dismiss
