@@ -5,4 +5,4 @@ This repository contains my solution to select mini projects in [this Udemy cour
 Notes for (almost) all the lectures are present in my [Notion Page](https://whitenoise1213.notion.site/ReactJS-25ad1aafdf7b430ead3d0e4036b251d9).
 
 # Certificate of Completion
-You can view my certificate of completion [here](./UC-d7e7c061-af72-4f11-aa93-b245193444e4.pdf).
+You can view my certificate of completion [here](http://ude.my/UC-d7e7c061-af72-4f11-aa93-b245193444e4).
